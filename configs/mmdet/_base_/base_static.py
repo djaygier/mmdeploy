@@ -4,7 +4,7 @@ onnx_config = dict(output_names=['dets', 'labels'], input_shape=[1024,1024])
 codebase_config = dict(
     type='mmdet',
     task='ObjectDetection',
-    model_type='end2end',
+    model_type='two_stage',
     post_processing=dict(
         score_threshold=0.05,
         confidence_threshold=0.005,  # for YOLOv3
