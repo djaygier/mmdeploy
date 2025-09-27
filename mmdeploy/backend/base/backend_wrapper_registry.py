@@ -1,10 +1,18 @@
 # Copyright (c) OpenMMLab. All rights reserved.
+import importlib
+
 from mmengine import Registry
 
 from mmdeploy.utils.config_utils import Backend
 
 
 def __build_backend_wrapper_class(backend: Backend, registry: Registry):
+    # Try to import the backend module if not already registered
+    if backend.value not in registry.module_dict:
+        try:
+            importlib.import_module('mmdeploy.backend.' + backend.value)
+        except Exception:
+            pass
     return registry.module_dict[backend.value]
 
 
